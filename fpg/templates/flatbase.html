@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load fpg_flatpages %}
+{% block flatmenu %}
+{% getmenu public as menus %}
+{% for menu in menus%}
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{menu.title}}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+    		{% if user.is_authenticated %}
+			    {% getflatpages menu.url for user as userpages %}
+			    {% for page in userpages %}
+			    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+			    {% endfor %}	
+			{% else %}	
+			    {% getflatpages menu.url as flatpages %}	
+			    {% for page in flatpages %}
+			    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+			    {% endfor %}
+			{% endif %}
+		    </ul>
+		</li>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    {% getmenu private as pmenus %}
+    {% for menu in pmenus%}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{menu.title}}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+			    {% getflatpages menu.url for user as userpages %}
+			    {% for page in userpages %}
+			    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+			    {% endfor %}	
+		    </ul>
+		</li>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
