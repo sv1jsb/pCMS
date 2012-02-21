@@ -8,9 +8,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{ 'document_root': settings.STATIC_ROOT}),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{ 'document_root': settings.MEDIA_ROOT}),
-    url(r'search/$','fpg.views.search',name="search"),
-    # Examples:
-    # url(r'^$', 'pCMS.views.home', name='home'),
-    # url(r'^pCMS/', include('pCMS.foo.urls')),
-
+    url(r'fpg/',include('fpg.urls')),
 )

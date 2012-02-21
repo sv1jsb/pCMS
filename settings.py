@@ -140,7 +140,11 @@ INSTALLED_APPS = (
     'fpg',
 
 )
-
+ELFINDER_MCE = {
+    "root": MEDIA_ROOT,
+    "URL": MEDIA_URL,
+    "tmbDir": ".tmb",
+    }
 #COMMENTS_APP = 'pcomments'
 
 #LOGIN_URL = '/members/login/'

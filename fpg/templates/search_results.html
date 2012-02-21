@@ -1,5 +1,5 @@
 {% extends 'flatbase.html' %}
-{% block title %}Αποτελέσματα αναζήτησης{%endblock%}
+{% block title %}Search results{%endblock%}
 {% block fpg_content %}
 {% if found_entries %}
     <ul>
@@ -8,6 +8,6 @@
     {%endfor%}
     </ul>
 {%else%}
-    <h3>Δεν βρέθηκε τίποτα</h3>
+    <h3>No results</h3>
 {% endif %}
 {% endblock %}

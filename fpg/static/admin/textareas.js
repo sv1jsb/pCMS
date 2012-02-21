@@ -16,10 +16,10 @@ tinyMCE.init({
     skin : "o2k7",
     skin_variant : "silver",
     content_css : "/static/css/bootstrap.css",
-    relative_urls: false
-/*    file_browser_callback: function(field_name, url, type, win) {
+    relative_urls: false,
+    file_browser_callback: function(field_name, url, type, win) {
         tinyMCE.activeEditor.windowManager.open({
-            file : '/elfinder/mce/',
+            file : '/fpg/elfinder_mce/',
             title : 'Διαχείριση αρχείων',
             width : 850,
             height : 700,
@@ -31,5 +31,5 @@ tinyMCE.init({
             window : win,
             input : field_name
         });
-    } */
+    } 
 });
