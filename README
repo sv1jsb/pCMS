@@ -13,6 +13,8 @@ Menus, like pages, can be viewed by all or by authenticated users.
 When a menu has the "required authentication" field checked, it will only be visible by logged in users.
 It will still display all the pages matching it's url regardless if the pages themselves require authentication.
 
+The main app of this project is fpg and can be used at other projects with minor modifications.
+
 Credits:
 pCMS has tinyMCE at the admin interface for designing the page.
 http://www.tinymce.com/
