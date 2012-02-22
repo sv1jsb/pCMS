@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="description" content="{%block description %}{%endblock%}">
+    <meta name="keywords" content="{%block keywords%}{%endblock%}">
     <!-- Le styles -->
 
     <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico">
-
+    <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png" />
     <link rel="apple-touch-icon" href="{{STATIC_URL}}img/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="{{STATIC_URL}}img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="{{STATIC_URL}}img/apple-touch-icon-114x114.png">
@@ -49,6 +49,13 @@
             <form class="navbar-search pull-right" method="get" action="/fpg/search/">
                 <input type="text" name="q" class="search-query" placeholder="Search">
             </form>
+            <ul class="nav pull-right">
+                {% if user.is_authenticated %}
+                <li><a href="/logout/">Logout</a></li>
+                {% else %}
+                <li><a href="/login/">Login</a></li>
+                {% endif %}
+            </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -58,6 +65,13 @@
     <div class="container">
         {% block fpg_content %}
         {% endblock %}
+
+      <hr>
+
+      <footer>
+        <p>&copy; {{SITE_NAME}} 2012</p>
+      </footer>
+
     </div> <!-- /container -->
 
     <!-- Le javascript

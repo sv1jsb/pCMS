@@ -4,6 +4,8 @@ from django.contrib.flatpages.models import FlatPage
 
 class Flatpage(FlatPage):
     published = models.BooleanField("Published", default=True, blank=True)
+    keywords = models.TextField(verbose_name=u"Keywords", blank=True)
+    description = models.TextField(verbose_name=u"Description", blank=True)
 
 class Menu(models.Model):
     title = models.CharField(verbose_name=u"Title",max_length=50)

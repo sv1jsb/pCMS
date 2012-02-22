@@ -49,9 +49,10 @@ def search(request):
         query_string = request.GET['q']
 
         entry_query = get_query(query_string, ['title', 'content',])
-
-        found_entries = Flatpage.objects.filter(entry_query).filter(published=True)
-
+        if not request.user.is_authenticated():
+            found_entries = Flatpage.objects.filter(entry_query).filter(published=True).filter(registration_required=False)
+        else:
+            found_entries = Flatpage.objects.filter(entry_query).filter(published=True)
     return render_to_response('search_results.html',
             { 'query_string': query_string, 'found_entries': found_entries },
         context_instance=RequestContext(request))

@@ -1,5 +1,6 @@
 tinyMCE.init({
-    mode : "textareas",
+    mode : "exact",
+    elements : "id_content",
     width : "800",
     height : "500",
     theme : "advanced",

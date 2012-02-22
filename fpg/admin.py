@@ -15,6 +15,7 @@ class FpgAdmin(FlatPageAdmin):
     fieldsets = (
         (None, {'fields': ('url', 'title', 'content', 'published','sites')}),
         ('Other choices', {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', 'template_name')}),
+        ('Meta tags', {'classes': ('collapse',), 'fields': ('keywords', 'description')}),
     )
     list_display = ('url', 'title','published','registration_required')
     list_filter = ('published','sites', 'enable_comments', 'registration_required')
