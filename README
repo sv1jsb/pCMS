@@ -1,0 +1,16 @@
+This is a very small CMS project. It's made by overriding Django's FlatPage app.
+By doing this we can add extra fields at the FlatPage model. I have added three extra fields:
+published, keywords and description. The first is a boolean so one can prepare a page and publish it when it's ready.
+The other two are optional text fields for populating the relevant meta tags of a page.
+
+I have also added a Menu model which groups relevant pages and displays the appropriate menu.
+For example, by creating a menu with a url /products/ it will link and dislpay all pages that start with /products/.
+
+Menus, like pages, can be viewed by all or by authenticated users.
+When a menu has the "required authentication" field checked, it will only be visible by logged in users.
+It will still display all the pages matching it's url regardless if the pages themselves require authentication.
+
+pCMS has tinyMCE at the admin interface for designing the page.
+It also includes elfinder for uploading images.
+The template used for rendering pages is Bootstrap from Twitter.
+
