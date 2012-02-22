@@ -5,8 +5,8 @@
 {% endblock %}
 {% block scriptsjs %}
     <script type="text/javascript" src="{{STATIC_URL}}admin/tiny_mce_popup.js"></script>
-<script src="{{ STATIC_URL }}admin/elfinder/js/elfinder.full.js" type="text/javascript" charset="utf-8"></script>
-<script src="{{ STATIC_URL }}admin/elfinder/js/i18n/elfinder.el.js" type="text/javascript" charset="utf-8"></script>
+<script src="{{ STATIC_URL }}admin/elfinder/js/elfinder.min.js" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript" charset="utf-8">
     var FileBrowserDialogue = {
         init : function () {
@@ -29,7 +29,7 @@
     $().ready(function() {
         var f = $('#finder').elfinder({
             url : '/fpg/elfinder_connector_mce/',
-            lang : 'el',
+            lang : 'en',
             docked : true,
             places : "",
             editorCallback : function(url) {

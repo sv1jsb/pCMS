@@ -14,7 +14,7 @@ class FpgAdmin(FlatPageAdmin):
     form = FpgForm
     fieldsets = (
         (None, {'fields': ('url', 'title', 'content', 'published','sites')}),
-        ('Άλλες επιλογές', {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', 'template_name')}),
+        ('Other choices', {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', 'template_name')}),
     )
     list_display = ('url', 'title','published','registration_required')
     list_filter = ('published','sites', 'enable_comments', 'registration_required')
