@@ -10,7 +10,14 @@ Menus, like pages, can be viewed by all or by authenticated users.
 When a menu has the "required authentication" field checked, it will only be visible by logged in users.
 It will still display all the pages matching it's url regardless if the pages themselves require authentication.
 
+Credits:
 pCMS has tinyMCE at the admin interface for designing the page.
+http://www.tinymce.com/
 It also includes elfinder for uploading images.
+http://elrte.org/elfinder
+Django-python connector for elfinder by Dmitry Shapoval
+https://bitbucket.org/unkier/django-elfinder/overview
 The template used for rendering pages is Bootstrap from Twitter.
-
+http://twitter.github.com/bootstrap/
+The search algorithm is based on Julien Phalip's post
+http://julienphalip.com/post/2825034077/adding-search-to-a-django-site-in-a-snap
