@@ -1,10 +1,13 @@
 This is a very small CMS project. It's made by overriding Django's FlatPage app.
-By doing this we can add extra fields at the FlatPage model. I have added three extra fields:
-published, keywords and description. The first is a boolean so one can prepare a page and publish it when it's ready.
-The other two are optional text fields for populating the relevant meta tags of a page.
+By doing this we can add extra fields at the FlatPage model. I have added some extra fields:
+- published: A boolean so one can prepare a page and publish it when it's ready.
+- styles: A text field for adding extra style to a page. It can be code enclosed in <style></style>tags or a file.
+- scripts: As above but it will be used for extra javascript.
+- keywords: For populating the keywords meta tag.
+- description: For populating the description meta tag.
 
 I have also added a Menu model which groups relevant pages and displays the appropriate menu.
-For example, by creating a menu with a url /products/ it will link and dislpay all pages that start with /products/.
+For example, by creating a menu with a url /products/ it will link and display all pages that start with /products/.
 
 Menus, like pages, can be viewed by all or by authenticated users.
 When a menu has the "required authentication" field checked, it will only be visible by logged in users.

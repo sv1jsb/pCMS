@@ -14,6 +14,7 @@ class FpgAdmin(FlatPageAdmin):
     form = FpgForm
     fieldsets = (
         (None, {'fields': ('url', 'title', 'content', 'published','sites')}),
+        ('Extra content', {'classes': ('collapse',), 'fields': ('scripts', 'styles')}),
         ('Other choices', {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', 'template_name')}),
         ('Meta tags', {'classes': ('collapse',), 'fields': ('keywords', 'description')}),
     )

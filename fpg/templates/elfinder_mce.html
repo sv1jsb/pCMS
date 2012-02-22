@@ -29,6 +29,7 @@
     $().ready(function() {
         var f = $('#finder').elfinder({
             url : '/fpg/elfinder_connector_mce/',
+            root: '{{ MEDIA_URL }}',
             lang : 'en',
             docked : true,
             places : "",
@@ -39,7 +40,7 @@
             height:500,
             rememberLastDir:false,
             dialog : {
-                title : 'Διαχείριση αρχείων',
+                title : 'File management',
                 height : 500
             }
         });

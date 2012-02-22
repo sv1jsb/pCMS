@@ -11,7 +11,7 @@ import re
 import shutil
 import time
 from datetime import datetime
-from django.utils.encoding import smart_unicode, smart_str
+
 class connector():
     """Connector for elFinder"""
 
@@ -48,7 +48,7 @@ class connector():
     }
 
     _commands = {
-        'open':	'__open',
+        'open': '__open',
         'reload': '__reload',
         'mkdir': '__mkdir',
         'mkfile': '__mkfile',
@@ -104,14 +104,14 @@ class connector():
     # public variables
     httpAllowedParameters = ('cmd', 'target', 'targets[]', 'current', 'tree', 'name',
         'content', 'src', 'dst', 'cut', 'init', 'type', 'width', 'height', 'upload[]')
-
+    
     def __init__(self, opts):
         self._response = {}
         self._request = {}
         self.httpStatusCode = 0
         self.httpHeader = {}
         self.httpResponse = None
-
+        
         self._time = time.time()
         t = datetime.fromtimestamp(self._time)
         self._today = time.mktime(datetime(t.year, t.month, t.day).timetuple())
@@ -121,8 +121,8 @@ class connector():
 
         for opt in opts:
             self._options[opt] = opts.get(opt)
-        if os.name == 'posix':
-            self._options['URL'] = self._options['URL'].rstrip('/')
+
+        self._options['URL'] = self._options['URL'].rstrip('/')
         self._options['root'] = self._options['root'].rstrip(os.sep)
         self.__debug('URL', self._options['URL'])
         self.__debug('root', self._options['root'])
@@ -150,9 +150,9 @@ class connector():
             if field in httpRequest:
                 if field == "targets[]":
                     self._request[field] = httpRequest.getlist(field)
-                else:
+                else:                   
                     self._request[field] = httpRequest[field]
-
+                
 
         if rootOk is True:
             if 'cmd' in self._request:
@@ -264,7 +264,6 @@ class connector():
             if 'target' in self._request:
                 target = self.__findDir(self._request['target'], None)
                 if not target:
-                    #self._response['error'] = 'Invalid parameters'
                     self._response['error'] = ''
                 elif not self.__isAllowed(target, 'read'):
                     self._response['error'] = 'Access denied'
@@ -373,7 +372,7 @@ class connector():
 
         if not isinstance(rmList, list):
             rmList = [rmList]
-
+        
         for rm in rmList:
             rmFile = self.__find(rm, curDir)
             if not rmFile: continue
@@ -384,7 +383,7 @@ class connector():
 
     def __upload(self):
         """Upload files"""
-
+        
         if 'current' in self._request:
             curDir = self.__findDir(self._request['current'], None)
             if not curDir:
@@ -657,9 +656,9 @@ class connector():
         files = []
         dirs = []
 
-        for f in sorted(os.listdir(u'%s'%path)):
+        for f in sorted(os.listdir(path)):
             if not self.__isAccepted(f): continue
-            pf = os.path.join(u'%s'%path, f)
+            pf = os.path.join(path, f)
             info = {}
             info = self.__info(pf)
             info['hash'] = self.__hash(pf)
@@ -773,8 +772,8 @@ class connector():
             'dirs': []
         }
         if self.__isAllowed(path, 'read'):
-            for d in sorted(os.listdir(u'%s'%path)):
-                pd = os.path.join(u'%s'%path, d)
+            for d in sorted(os.listdir(path)):
+                pd = os.path.join(path, d)
                 if os.path.isdir(pd) and not os.path.islink(pd) and self.__isAccepted(d):
                     tree['dirs'].append(self.__tree(pd))
         return tree
@@ -905,7 +904,7 @@ class connector():
 
     def __findDir(self, fhash, path):
         """Find directory by hash"""
-        fhash = u'%s'%fhash
+        fhash = str(fhash)
         if not path:
             path = self._options['root']
             if fhash == self.__hash(path):
@@ -914,7 +913,7 @@ class connector():
         if not os.path.isdir(path):
             return None
 
-        for d in os.listdir(u'%s'%path):
+        for d in os.listdir(path):
             pd = os.path.join(path, d)
             if os.path.isdir(pd) and not os.path.islink(pd):
                 if fhash == self.__hash(pd):
@@ -929,7 +928,7 @@ class connector():
 
     def __find(self, fhash, parent):
         """Find file/dir by hash"""
-        fhash = u'%s'%fhash
+        fhash = str(fhash)
         if os.path.isdir(parent):
             for i in os.listdir(parent):
                 path = os.path.join(parent, i)
@@ -1285,7 +1284,6 @@ class connector():
 
     def __hash(self, path):
         """Hash of the path"""
-        path=u'%r'%path
         m = hashlib.md5()
         m.update(path)
         return str(m.hexdigest())
@@ -1294,8 +1292,7 @@ class connector():
     def __path2url(self, path):
         curDir = path
         length = len(self._options['root'])
-        url = self._options['URL'] + curDir[length:].replace(os.sep, '/')
-
+        url = str(self._options['URL'] + curDir[length:]).replace(os.sep, '/')
         try:
             import urllib
             url = urllib.quote(url, '/:~')
@@ -1351,8 +1348,8 @@ class connector():
         archive = { 'create': {}, 'extract': {} }
         c = archive['create']
         e = archive['extract']
-
-        #__checkArchivers is OFF
+        
+        #__checkArchivers is OFF 
         self._options['archiveMimes'] = c.keys()
         self._options['archivers'] = archive
         return
@@ -1464,6 +1461,4 @@ class connector():
             return False
 
         return True
-
-
 

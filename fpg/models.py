@@ -4,6 +4,8 @@ from django.contrib.flatpages.models import FlatPage
 
 class Flatpage(FlatPage):
     published = models.BooleanField("Published", default=True, blank=True)
+    scripts = models.TextField(verbose_name=u"Scripts", blank=True)
+    styles = models.TextField(verbose_name=u"Styles", blank=True)
     keywords = models.TextField(verbose_name=u"Keywords", blank=True)
     description = models.TextField(verbose_name=u"Description", blank=True)
 
