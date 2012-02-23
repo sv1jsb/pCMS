@@ -134,7 +134,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.flatpages',
-#    'django.contrib.comments',
+    'django.contrib.comments',
+    'pcomments',
 #    'south',
 #    'members',
     'fpg',
@@ -145,7 +146,7 @@ ELFINDER_MCE = {
     "URL": MEDIA_URL,
     "tmbDir": ".tmb",
     }
-#COMMENTS_APP = 'pcomments'
+COMMENTS_APP = 'pcomments'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL= '/'

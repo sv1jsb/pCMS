@@ -7,7 +7,7 @@ from django.core.xheaders import populate_xheaders
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_protect
 
-DEFAULT_TEMPLATE = 'fpg_default.html'
+
 
 # This view is called from FlatpageFallbackMiddleware.process_response
 # when a 404 is raised, which often means CsrfViewMiddleware.process_view
@@ -40,11 +40,17 @@ def render_flatpage(request, f):
     """
     Internal interface to the flat page view.
     """
+
+    DEFAULT_TEMPLATE = 'fpg_default.html'
+
     # If registration is required for accessing this page, and the user isn't
     # logged in, redirect to the login page.
     if f.registration_required and not request.user.is_authenticated():
         from django.contrib.auth.views import redirect_to_login
         return redirect_to_login(request.path)
+    # If comments are enabled change the default template
+    if f.enable_comments:
+        DEFAULT_TEMPLATE = 'fpg_comments.html'
     if f.template_name:
         t = loader.select_template((f.template_name, DEFAULT_TEMPLATE))
     else:
