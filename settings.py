@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db.db',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(PROJECT_ROOT,'db.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -104,6 +104,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'fpg.middleware.FpgFallbackMiddleware',
+    'fpg.middleware.SecureRequiredMiddleware',
 )
 
 ROOT_URLCONF = 'pCMS.urls'
@@ -136,8 +137,6 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.comments',
     'pcomments',
-#    'south',
-#    'members',
     'fpg',
 
 )
@@ -150,11 +149,13 @@ COMMENTS_APP = 'pcomments'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL= '/'
-#SESSION_SAVE_EVERY_REQUEST = True
-#SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-#SESSION_EXPIRE_SECONDS = 900
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-
+HTTPS_SUPPORT = True
+SECURE_REQUIRED_PATHS = (
+    '/login/',
+)
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
