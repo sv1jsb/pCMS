@@ -1,0 +1,47 @@
+{% extends 'flatbase.html' %}
+{% load url from future %}
+{% load comments %}
+{% block description %}{{flatpage.description}}{%endblock%}
+{% block keywords %}{{flatpage.keywords}}{%endblock%}
+{% block title %}{{flatpage.title}}{% endblock %}
+{% block styles %}{{ flatpage.styles }}{% endblock %}
+{% block scripts %}{{ flatpage.scripts }}{% endblock %}
+{% block fpg_content %}
+{{flatpage.content}}
+<hr>
+{% get_comment_count for flatpage as comment_count %}
+{% if comment_count > 0 %}
+    {% if comment_count == 1 %}
+    <span class="label label-info">There is 1 comment.</span>
+    {% else %}
+    <span class="label label-info">There are {{comment_count}} comments.</span>
+    {% endif %}
+{% else %}
+    <span class="label label-info">No comments yet.</span>
+{% endif %}
+<br/><br/>
+{% get_comment_list for flatpage as comment_list %}
+{% for comment in comment_list %}
+<div class="well">
+    <ul class="unstyled">
+    <li><blockquote><p>{{comment.comment}}</p><small>{{comment.user_name}} at {{comment.submit_date|date:"d/m/Y"}}</small></blockquote></li>
+    {% if comment.user == user or user.is_superuser%}
+    <li><form action="{% url 'comments-delete' comment.id %}" method="post">{% csrf_token %}<input type="hidden" name="next" value="{{flatpage.url}}"/>
+    <button type="submit" onclick='return confirm("Are you sure?");' class="btn btn-primary"><i class="icon-remove icon-white"></i> Delete</button></form></li>
+    {% endif %}
+    </ul>
+</div>
+{% endfor %}
+{% if user.is_authenticated %}
+    <br/>
+    {% get_comment_form for flatpage as form %}
+    <form action="{% comment_form_target %}" method="post" class="well">{% csrf_token %}
+        {{form.content_type}}{{form.object_pk}}{{form.timestamp}}{{form.security_hash}}
+        <label for="id_comment">Publish your comment</label>
+        <textarea id="id_comment" rows="10" cols="40" name="comment" class="span4"></textarea><br/>
+        <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Publish</button>
+        <input type="hidden" name="next" value="{{flatpage.url}}"/>
+    </form>
+{% endif %}
+{% endblock %}
+

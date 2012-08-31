@@ -1,0 +1,53 @@
+{% extends 'elfinderbase.html' %}
+{% block  title%}File Management{% endblock %}
+{% block style %}
+	<link rel="stylesheet" href="{{STATIC_URL}}admin/elfinder/css/elfinder.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{% endblock %}
+{% block scriptsjs %}
+    <script type="text/javascript" src="{{STATIC_URL}}admin/tiny_mce_popup.js"></script>
+<script src="{{ STATIC_URL }}admin/elfinder/js/elfinder.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" charset="utf-8">
+    var FileBrowserDialogue = {
+        init : function () {
+            // Here goes your code for setting your custom things onLoad.
+        },
+        mySubmit : function (choice) {
+            var baseURL = "{{MEDIA_URL}}"
+            var URL = choice;
+            var win = tinyMCEPopup.getWindowArg("window");
+            win.document.getElementById(tinyMCEPopup.getWindowArg("input")).value = URL;
+            if (typeof(win.ImageDialog) != "undefined")
+            {
+                if (win.ImageDialog.getImageData) win.ImageDialog.getImageData();
+                if (win.ImageDialog.showPreviewImage) win.ImageDialog.showPreviewImage(URL);
+            }
+            tinyMCEPopup.close();
+        }
+    }
+    tinyMCEPopup.onInit.add(FileBrowserDialogue.init, FileBrowserDialogue);
+    $().ready(function() {
+        var f = $('#finder').elfinder({
+            url : '/fpg/elfinder_connector_mce/',
+            root: '{{ MEDIA_URL }}',
+            lang : 'en',
+            docked : true,
+            places : "",
+            editorCallback : function(url) {
+                FileBrowserDialogue.mySubmit(url);
+            },
+            selectMultiple : false,
+            height:500,
+            rememberLastDir:false,
+            dialog : {
+                title : 'File management',
+                height : 500
+            }
+        });
+    })
+</script>
+{% endblock %}
+{% block content %}
+	<div id="finder">finder</div>
+
+{% endblock %}

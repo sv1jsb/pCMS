@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="el">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Andreas Porevopoulos, sv1jsb@gmail.com">
+    <meta name="description" content="{%block description %}{%endblock%}">
+    <meta name="keywords" content="{%block keywords%}{%endblock%}">
+    <!-- Le styles -->
+
+    <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="{{STATIC_URL}}css/bootstrap-responsive.css" rel="stylesheet">
+    {% block styles %}
+    {% endblock %}
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico">
+    <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png" />
+    <link rel="apple-touch-icon" href="{{STATIC_URL}}img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{STATIC_URL}}img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{STATIC_URL}}img/apple-touch-icon-114x114.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">{{SITE_NAME}}</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                {% block flatmenu %}{%endblock%}
+            </ul>
+            <form class="navbar-search pull-right" method="get" action="/fpg/search/">
+                <input type="text" name="q" class="search-query" placeholder="Search">
+            </form>
+            <ul class="nav pull-right">
+                {% if user.is_authenticated %}
+                <li><a href="/logout/">Logout</a></li>
+                {% else %}
+                <li><a href="/login/">Login</a></li>
+                {% endif %}
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container">
+        {% block fpg_content %}
+        {% endblock %}
+
+      <hr>
+
+      <footer>
+        <p>&copy; {{SITE_NAME}} 2012</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{STATIC_URL}}js/jquery.js"></script>
+    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+    {% block scripts %}
+    {% endblock %}
+  </body>
+</html>
+

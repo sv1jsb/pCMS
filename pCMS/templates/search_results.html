@@ -1,0 +1,13 @@
+{% extends 'flatbase.html' %}
+{% block title %}Search results{%endblock%}
+{% block fpg_content %}
+{% if found_entries %}
+    <ul>
+    {% for found in found_entries %}
+        <li><a href="{{found.url}}">{{found.title}}</a></li>
+    {%endfor%}
+    </ul>
+{%else%}
+    <h3>No results</h3>
+{% endif %}
+{% endblock %}

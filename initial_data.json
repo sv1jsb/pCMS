@@ -1,0 +1,107 @@
+[
+  {
+    "pk": 1, 
+    "model": "sites.site", 
+    "fields": {
+      "domain": "www.pCMS.com", 
+      "name": "www.pCMS.com"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "Home", 
+      "url": "/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "<h1>Home</h1>\r\n<p>&nbsp;</p>\r\n<p>This is an example home page</p>", 
+      "enable_comments": false
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "About this project", 
+      "url": "/pCMS/about/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "<h1>About</h1>\r\n<p>&nbsp;</p>\r\n<p>This is an example of a page in a menu</p>", 
+      "enable_comments": true
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": true, 
+      "title": "Private page", 
+      "url": "/pCMS/private/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "<h3>Private</h3>\r\n<p>&nbsp;</p>\r\n<p>This is a private page. Only logged in users have acces to it.</p>", 
+      "enable_comments": false
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "fpg.flatpage", 
+    "fields": {
+      "styles": "", 
+      "description": "A very small (pico) Content Management System for django", 
+      "published": true, 
+      "sites": [
+        1
+      ], 
+      "scripts": "", 
+      "keywords": "pCMS, django, python, Content Management System, CMS"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "fpg.flatpage", 
+    "fields": {
+      "styles": "", 
+      "description": "", 
+      "published": true, 
+      "sites": [
+        1
+      ], 
+      "scripts": "", 
+      "keywords": ""
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "fpg.flatpage", 
+    "fields": {
+      "styles": "", 
+      "description": "", 
+      "published": true, 
+      "sites": [
+        1
+      ], 
+      "scripts": "", 
+      "keywords": ""
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "fpg.menu", 
+    "fields": {
+      "url": "/pCMS/", 
+      "index": 1, 
+      "registration_required": false, 
+      "title": "pCMS"
+    }
+  }
+]
