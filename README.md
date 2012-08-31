@@ -42,8 +42,9 @@ Run the server as always with:
 ### Usage
 
 Go to the admin interface and add pages and menus. For example:
-*Add a menu with the url */services/*
-*Add pages with urls starting with the above: */services/design/* , */services/hosting/*
-*All this pages will be grouped under the same menu.
+
+* Add a menu with the url */services/*
+* Add pages with urls starting with the above: */services/design/* , */services/hosting/*
+* All this pages will be grouped under the same menu.
 
 
